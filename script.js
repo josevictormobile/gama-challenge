@@ -6,6 +6,9 @@ function consultaCEP(){
     var request = new XMLHttpRequest();
 
     request.open('GET', url);
+    request.onerror = (e)=>{
+        document.getElementById('return').innerHTML = 'API OFFLINE OU CEP INVÁLIDO'
+    }
 
     request.onload = ()=>{
         var response = JSON.parse(request.responseText);
