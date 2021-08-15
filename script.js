@@ -1,6 +1,4 @@
-﻿const formulario = document.getElementById('formulario');
-
-function consultaCEP() {
+﻿function consultaCEP() {
     var cep = document.getElementById('cep').value.replace(/\D/g, '');
     console.log(cep);
     var url = "https://viacep.com.br/ws/" + cep + "/json/";
@@ -31,13 +29,6 @@ function consultaCEP() {
     request.send();
 
 }
-
-
-// formulario.addEventListener('submit', e => {
-//     e.preventDefault();
-//     cadastrar();
-// });
-
 
 function cadastrar() {
     var candidato = {
