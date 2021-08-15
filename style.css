@@ -1,0 +1,14 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
+
+#caixa-erro{
+  position: sticky;
+  left:0px;
+  top:0px;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+#caixa-erro.fadeIn{
+  opacity:1;
+}
+

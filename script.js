@@ -1,31 +1,73 @@
-function consultaCEP(){
-    var cep = document.getElementById('cep').value.replace(/\D/g,'');
+﻿const formulario = document.getElementById('formulario');
+
+function consultaCEP() {
+    var cep = document.getElementById('cep').value.replace(/\D/g, '');
     console.log(cep);
-    var url = "https://viacep.com.br/ws/"+cep+"/json/";
+    var url = "https://viacep.com.br/ws/" + cep + "/json/";
     console.log(url);
     var request = new XMLHttpRequest();
 
     request.open('GET', url);
-    request.onerror = (e)=>{
-        document.getElementById('return').innerHTML = 'API OFFLINE OU CEP INVÁLIDO'
+    request.onerror = (e) => {
+        document.getElementById('caixa-erro').classList.toggle('fadeIn');
+        document.getElementById('erro').innerHTML = 'API OFFLINE OU CEP INVÁLIDO'
     }
 
-    request.onload = ()=>{
+    request.onload = () => {
         var response = JSON.parse(request.responseText);
 
-        if(response.erro === true){
-            document.getElementById('return').innerHTML = 'CEP NÃO ENCONTRADO';
-        }else{
+        if (response.erro === true) {
+            document.getElementById('caixa-erro').classList.toggle('fadeIn');
+            document.getElementById('erro').innerHTML = 'CEP NÃO ENCONTRADO'
+        } else {
             console.log(response);
-            document.getElementById('return').innerHTML = 
-            
-            'CEP: '+ response.cep+'<br>'+
-            'Logradouro: '+ response.logradouro+'<br>'+
-            'CEP: '+ response.bairro+'<br>'+
-            'Cidade/UF: '+ response.localidade+' / '+ response.uf;
+            document.getElementById('logradouro').value = response.logradouro;
+            document.getElementById('bairro').value = response.bairro;
+            document.getElementById('cidade').value = response.localidade;
+            document.getElementById('uf').value = response.uf;
         }
     }
-    
+
     request.send();
 
 }
+
+
+// formulario.addEventListener('submit', e => {
+//     e.preventDefault();
+//     cadastrar();
+// });
+
+
+function cadastrar() {
+    var candidato = {
+        nome: document.getElementById('nome').value,
+        //nascimento: document.getElementById('nascimento').value,
+        cep: document.getElementById('cep').value,
+        logradouro: document.getElementById('logradouro').value,
+        numero: document.getElementById('numero_logradouro').value,
+        bairro: document.getElementById('bairro').value,
+        cidade: document.getElementById('cidade').value,
+        estado: document.getElementById('uf').value,
+        telefone: document.getElementById('telefone').value,
+        email: document.getElementById('email').value,
+        profissao: document.getElementById('profissao').value
+    }
+    console.log(candidato);
+    let enviarCandidato = async (candidato) => {
+        const rawResponse = await fetch('https://httpbin.org/post', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(candidato)
+        });
+        const content = await rawResponse.json();
+        console.log(content);
+    }
+    enviarCandidato(candidato);    
+}
+
+
+
