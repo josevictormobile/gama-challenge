@@ -23,6 +23,10 @@
             document.getElementById('bairro').value = response.bairro;
             document.getElementById('cidade').value = response.localidade;
             document.getElementById('uf').value = response.uf;
+            document.getElementById('logradouro').disabled = true;
+            document.getElementById('bairro').disabled = true;
+            document.getElementById('cidade').disabled = true;
+            document.getElementById('uf').disabled = true;
         }
     }
 
@@ -33,7 +37,7 @@
 function cadastrar() {
     var candidato = {
         nome: document.getElementById('nome').value,
-        //nascimento: document.getElementById('nascimento').value,
+        nascimento: document.getElementById('nascimento').value,
         cep: document.getElementById('cep').value,
         logradouro: document.getElementById('logradouro').value,
         numero: document.getElementById('numero_logradouro').value,
@@ -57,7 +61,11 @@ function cadastrar() {
         const content = await rawResponse.json();
         console.log(content);
     }
-    enviarCandidato(candidato);    
+    enviarCandidato(candidato);
+}
+
+function mostraEndereco() {
+    document.getElementById('caixa_endereco').classList.toggle('is-hidden');
 }
 
 
