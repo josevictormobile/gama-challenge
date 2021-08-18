@@ -37,6 +37,7 @@
 function cadastrar() {
     var candidato = {
         nome: document.getElementById('nome').value,
+        cpf: document.getElementById('cpf').value,
         nascimento: document.getElementById('nascimento').value,
         cep: document.getElementById('cep').value,
         logradouro: document.getElementById('logradouro').value,
@@ -46,11 +47,11 @@ function cadastrar() {
         estado: document.getElementById('uf').value,
         telefone: document.getElementById('telefone').value,
         email: document.getElementById('email').value,
-        profissao: document.getElementById('profissao').value
+        //profissao: document.getElementById('profissao').value
     }
     console.log(candidato);
     let enviarCandidato = async (candidato) => {
-        const rawResponse = await fetch('https://httpbin.org/post', {
+        const rawResponse = await fetch('https://localhost:5001/api/Candidato', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -67,6 +68,8 @@ function cadastrar() {
 function mostraEndereco() {
     document.getElementById('caixa_endereco').classList.toggle('is-hidden');
 }
+
+
 
 
 
