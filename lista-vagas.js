@@ -1,5 +1,5 @@
 function listCandidatos() {
-    fetch('https://localhost:5001/api/vaga').then(async function (response) {
+    fetch('https://localhost:5001/Profissoes').then(async function (response) {
         let vagas = await response.json();
         console.log(vagas);
         let html = "";

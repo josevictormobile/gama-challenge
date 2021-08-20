@@ -41,17 +41,18 @@ function cadastrar() {
         nascimento: document.getElementById('nascimento').value,
         cep: document.getElementById('cep').value,
         logradouro: document.getElementById('logradouro').value,
-        numero: 0,//document.getElementById('numero_logradouro').value,
+        numero: document.getElementById('numero_logradouro').value,
         bairro: document.getElementById('bairro').value,
         cidade: document.getElementById('cidade').value,
         estado: document.getElementById('uf').value,
         telefone: document.getElementById('telefone').value,
         email: document.getElementById('email').value,
-        id_vaga:location.search.substring(1).split('=')[1]
+        complemento: "sem",
+        profissaoId:parseInt(location.search.substring(1).split('=')[1])
     }
     console.log(candidato);
     let enviarCandidato = async (candidato) => {
-        const rawResponse = await fetch('https://localhost:5001/api/Candidato', {
+        const rawResponse = await fetch('https://localhost:5001/api/Candidatos', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -60,7 +61,7 @@ function cadastrar() {
             body: JSON.stringify(candidato)
         });
         const content = await rawResponse.json();
-        console.log(content);
+        console.log(content.error());
     }
     enviarCandidato(candidato);
 }
@@ -76,7 +77,7 @@ function cadastrarVaga(){
     }
     console.log(vaga);
     let enviarCandidato = async (vaga) => {
-        const rawResponse = await fetch('https://localhost:5001/api/Vaga', {
+        const rawResponse = await fetch('https://localhost:5001/Profissoes', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
